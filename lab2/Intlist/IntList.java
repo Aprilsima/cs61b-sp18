@@ -100,8 +100,8 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
         if (A==null){
-            IntList p=new IntList(B.first, B.rest);
-            return p;
+            //IntList p=new IntList(B.first, B.rest);
+            return B;
         }
         IntList p=new IntList(A.first, null);
         IntList ori=p;
