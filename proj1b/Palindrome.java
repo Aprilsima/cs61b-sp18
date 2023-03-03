@@ -14,7 +14,7 @@ public class Palindrome {
 
 
     //a helper method
-    public boolean isPalindrome(Deque d) {
+    private boolean isPalindrome(Deque d) {
         if (d.size() == 1 || d.size() == 0) {
             return true;
         } else if (d.removeLast() == d.removeFirst()) {
@@ -30,7 +30,7 @@ public class Palindrome {
         return isPalindrome(d, cc);
     }
 
-    public boolean isPalindrome(Deque<Character> d, CharacterComparator cc) {       //So wonderful that you write down "<Character>" after Deque.
+    private boolean isPalindrome(Deque<Character> d, CharacterComparator cc) {       //So wonderful that you write down "<Character>" after Deque.
         if (d.size() == 1 || d.size() == 0) {
             return true;
         } else if (cc.equalChars(d.removeLast(), d.removeFirst())) {         //If you haven't written "Deque<Character>", you have to cast d here to Character. To make generic a specific type only has something to with initializing other than using.
