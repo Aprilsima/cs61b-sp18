@@ -33,7 +33,7 @@ public class TestArrayDequeGold {
         StudentArrayDeque<Integer> b = new StudentArrayDeque<>();
         String message = "";
         for (int i = 0; i < 20; i++) {
-            int number = StdRandom.uniform(10);
+            Integer number = StdRandom.uniform(10);
             a.addLast(number);
             b.addLast(number);
             message += "AddLast(" + number + ")\n";
@@ -54,7 +54,7 @@ public class TestArrayDequeGold {
         StudentArrayDeque<Integer> b = new StudentArrayDeque<>();
         String message = "";
         for (int i = 0; i < 10; i++) {
-            int number = StdRandom.uniform(10);
+            Integer number = StdRandom.uniform(10);
             a.addLast(number);
             b.addLast(number);
            message += "AddLast(" + number + ")\n";
