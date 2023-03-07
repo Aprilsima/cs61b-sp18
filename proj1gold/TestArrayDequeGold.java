@@ -1,8 +1,8 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 public class TestArrayDequeGold {
-    static ArrayDequeSolution<Integer> a = new ArrayDequeSolution<>();
-    static StudentArrayDeque<Integer> b = new StudentArrayDeque<>();
+    public ArrayDequeSolution<Integer> a = new ArrayDequeSolution<>();
+    public StudentArrayDeque<Integer> b = new StudentArrayDeque<>();
     @Test
     public void testaddFirst() {
         for (int i = 2; i < 10000; i++) {
