@@ -11,7 +11,7 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[8];
         size = 0;
         nextfirst = 7;     //always the end of the array
-        nextlast = 1;      //maybe i should change it to items.length-1
+        nextlast = 0;      //maybe i should change it to items.length-1
     }
 
 
