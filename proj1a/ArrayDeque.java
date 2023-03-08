@@ -64,6 +64,9 @@ public class ArrayDeque<T> {
     }
      /* make our ArrayDeque have a better usage ration(>25% and <50%). */
     private void efficient() {
+        if (size == 0) {
+            return;
+        }
         if (items.length > 16 && items.length / size > 4) {
             resize(items.length / 2);
         } else if (items.length / size < 2) {
