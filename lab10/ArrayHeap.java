@@ -201,7 +201,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             return;
         }
         for (Node node : contents) {
-            if (node.myItem != null && node.myItem.equals(item)) {
+            if (node != null && node.myItem.equals(item)) {
                 node.myPriority = priority;
             }
         }
