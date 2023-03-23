@@ -47,13 +47,51 @@ public class QuickSort {
     private static <Item extends Comparable> void partition(
             Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
-        // Your code here!
+        for (Item x : unsorted) {
+            if (x.compareTo(pivot) < 0) {
+                less.enqueue(x);
+            } else if (x.compareTo(pivot) == 0) {
+                equal.enqueue(x);
+            } else{
+                greater.enqueue(x);
+            }
+        }
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
-        // Your code here!
-        return items;
+        Queue<Item> result = new Queue<>();
+        if (items.isEmpty()) {
+            return result;
+        } else if(items.size() == 1) {
+            result.enqueue(items.peek());
+            return result;
+        }
+        Queue<Item> less = new Queue<>();
+        Queue<Item> greater = new Queue<>();
+        Queue<Item> equal = new Queue<>();
+        Item pivot = getRandomItem(items);
+        partition(items, pivot, less, equal, greater);
+        Queue<Item> sorted_less= quickSort(less);
+        Queue<Item> sorted_greater = quickSort(greater);
+        result = catenate(catenate(sorted_less, equal), sorted_greater);
+        return result;
+    }
+
+
+
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<String>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("Bob");
+        students.enqueue("April");
+        System.out.println("Queue is: " + students.toString());
+        Queue<String> students_change = QuickSort.quickSort(students);
+        System.out.println("After changing, the original queue is: " + students.toString());      //which should be unchanged;
+        System.out.println("After changing, the returned queue is: " + students_change.toString());
+
     }
 }

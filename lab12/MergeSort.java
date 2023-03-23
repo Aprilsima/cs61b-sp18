@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.Queue;
+import org.junit.Test;
 
 public class MergeSort {
     /**
@@ -34,8 +35,13 @@ public class MergeSort {
     /** Returns a queue of queues that each contain one item from items. */
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
-        // Your code here!
-        return null;
+        Queue<Queue<Item>> result = new Queue<>();
+        for (Item x : items) {
+            Queue<Item> single = new Queue<>();
+            single.enqueue(x);
+            result.enqueue(single);
+        }
+        return result;
     }
 
     /**
@@ -53,14 +59,54 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+        Queue<Item> result = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            Item min = getMin(q1, q2);
+            result.enqueue(min);
+        }
+        return result;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        // Your code here!
-        return items;
+        Queue<Item> result = new Queue<>();
+        if (items.isEmpty()) {
+            return result;
+        } else if(items.size() == 1) {
+            result.enqueue(items.peek());
+            return result;
+        }
+        //I need to get two sorted queues first;
+        Queue<Queue<Item>> copyOfOriginal = makeSingleItemQueues(items);
+        int size = copyOfOriginal.size();
+        Queue<Item> front = new Queue<>();
+        Queue<Item> back = new Queue<>();
+        int i = 0;
+        for (; i < (size / 2); i++) {
+            front.enqueue(copyOfOriginal.dequeue().dequeue());
+        }
+        for (; i < size; i++) {
+            back.enqueue(copyOfOriginal.dequeue().dequeue());
+        }
+        Queue<Item> sortedfront = mergeSort(front);
+        Queue<Item> sortedback = mergeSort(back);
+        result = mergeSortedQueues(sortedfront, sortedback);
+        return result;
     }
+
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<String>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("Bob");
+        students.enqueue("April");
+        System.out.println("Queue is: " + students.toString());
+        Queue<String> students_change = MergeSort.mergeSort(students);
+        System.out.println("After changing, the original queue is: " + students.toString());      //which should be unchanged;
+        System.out.println("After changing, the returned queue is: " + students_change.toString());
+
+    }
+
 }
