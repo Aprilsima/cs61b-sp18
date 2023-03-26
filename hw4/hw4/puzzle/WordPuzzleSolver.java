@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class WordPuzzleSolver {
     public static void main(String[] args) {
-        String start = "hose";
+        String start = "horse";
         String goal = "nurse";
 
         Word startState = new Word(start, goal);

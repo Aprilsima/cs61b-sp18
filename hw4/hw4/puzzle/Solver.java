@@ -8,7 +8,6 @@ public class Solver {
     public SearchNode init;
     public ArrayDeque<WorldState> path;
     public MinPQ<SearchNode> pq;
-    public HashMap<WorldState, Integer> estimates;
     public class SearchNode {
         WorldState worldstate;
         int moves;
@@ -27,7 +26,7 @@ public class Solver {
 
         public static class movesComparator implements Comparator<SearchNode> {
             public int compare(SearchNode a, SearchNode b) {
-                return a.moves-b.moves;
+                return a.moves +a.worldstate.estimatedDistanceToGoal() - b.moves - b.worldstate.estimatedDistanceToGoal();
             }
         }
     }
@@ -37,7 +36,6 @@ public class Solver {
         pq = new MinPQ(movescomparator);
         pq.insert(init);
         path = new ArrayDeque<>();
-        estimates = new HashMap<>();
         SearchNode now = pq.delMin();
         helper(now);
     }
@@ -53,10 +51,7 @@ public class Solver {
         } else {
             for (WorldState neighbour : now.worldstate.neighbors()) {
                 if (now.previous == null || neighbour != now.previous.worldstate) {
-                    if (!estimates.containsKey(neighbour)) {
-                        estimates.put(neighbour, neighbour.estimatedDistanceToGoal());
-                    }
-                    SearchNode next = new SearchNode(neighbour, estimates.get(neighbour) + now.moves, now);
+                    SearchNode next = new SearchNode(neighbour, 1 + now.moves, now);
                     pq.insert(next);
                 }
             }
