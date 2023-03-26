@@ -2,7 +2,6 @@ package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 import java.util.ArrayDeque;
 import java.util.Comparator;
-import java.util.HashMap;
 
 public class Solver {
     public SearchNode init;
@@ -24,7 +23,7 @@ public class Solver {
             previous = z;
         }
 
-        public static class movesComparator implements Comparator<SearchNode> {
+        public class movesComparator implements Comparator<SearchNode> {
             public int compare(SearchNode a, SearchNode b) {
                 return a.moves +a.worldstate.estimatedDistanceToGoal() - b.moves - b.worldstate.estimatedDistanceToGoal();
             }
@@ -32,7 +31,7 @@ public class Solver {
     }
     public Solver(WorldState initial) {
         init = new SearchNode(initial);
-        Comparator<SearchNode> movescomparator = new SearchNode.movesComparator();
+        Comparator<SearchNode> movescomparator = init.new movesComparator();
         pq = new MinPQ(movescomparator);
         pq.insert(init);
         path = new ArrayDeque<>();
