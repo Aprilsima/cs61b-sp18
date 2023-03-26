@@ -88,7 +88,7 @@ public class Board implements WorldState {
         int value = tileAt(x, y);
         if (value != BLANK) {
             int shouldx = (value - 1) / N;
-            int shouldy = Math.ceilMod(y, N);
+            int shouldy = (value - 1) % N;
             return (shouldx + shouldy - x - y);
         }
         return 0;
